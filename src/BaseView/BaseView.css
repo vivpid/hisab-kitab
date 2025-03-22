@@ -1,0 +1,12 @@
+.BaseView {
+    width: 100%;
+    height: 90vh;
+    color: rgb(78, 216, 223);
+}
+
+.LoginScreen {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20vh;
+    align-items: center;
+}

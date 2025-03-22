@@ -1,0 +1,43 @@
+.ProfileView{
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ProfileBox {
+    background-color: white;
+    max-width: 70vw;
+    height: auto;
+    border: 1vh;
+    border-color: black;
+    border-radius: 2vh 0.5vw;
+    border-style: groove;
+    font-size: 3vh;
+}
+
+.InfoBox {
+    display: flex;
+    flex-direction: row;
+    padding: 1vh 2vh;
+    justify-content: center;
+    text-align: center;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+button {
+    width: 100%;
+    background-color: rgb(78, 216, 223);
+    color: rgb(244, 54, 54);
+    margin-top: 2vh;
+    font-size: 3vh;
+    padding: 1vh 0vw;
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
+}

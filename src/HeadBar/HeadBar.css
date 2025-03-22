@@ -1,0 +1,33 @@
+.HeaderBar {
+    width: 100%;
+    height: 10vh;
+    background-color: rgb(78, 216, 223);
+    color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Logo img {
+    width: auto;
+    height: 10vw;
+    margin-left: 2vw;
+    margin-right: 1vb;
+    margin-top: 0.5vh;
+    margin-bottom: 0.5vb;
+}
+
+.Logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.UserActions{
+    padding-right: 1vw;
+}
+
+.icons {
+  font-size: 13vw;
+}
