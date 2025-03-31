@@ -2,6 +2,8 @@
     width: 100%;
     height: 90vh;
     color: rgb(78, 216, 223);
+    display: flex;
+    flex-direction: column;
 }
 
 .LoginScreen {
@@ -9,4 +11,122 @@
     flex-direction: column;
     margin-top: 20vh;
     align-items: center;
+}
+
+.eventView {
+    width: 100%;
+    height: 80vh;
+}
+
+.eventView img {
+    width: 100%;
+}
+
+.editExpense {
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    user-select: none;
+    cursor: default;
+    
+}
+
+.addExpense {
+    width: 49.5vw;
+    align-content: center;
+    text-align: center;
+    font-weight: 200;
+    font-size: large;
+}
+
+.settleUp {
+    width: 49.5vw;
+    align-content: center;
+    text-align: center;
+}
+
+.addEvent {
+    height: 10vh;
+    text-align: center;
+    font-weight: 200;
+    font-size: large;
+    user-select: none;
+    cursor: default;
+    align-content: center;
+}
+
+.eventHeader {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 4vw 1vh;
+}
+
+.eventHeader div{
+    font-size: xx-large;
+    font-weight: 600;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: auto;
+}
+
+.dialogBoxView {
+    width: 100%;
+    height: 100%;
+    z-index: 1001;
+    background-color: rgba(0, 0, 0, 0.104);
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    user-select: none;
+    cursor: default;
+}
+
+.dialogBox {
+    width: 55vw;
+    background-color: white;
+    padding: 1vh;
+    border-radius: 2vw;
+}
+
+.dialogHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.dialogHeader div{
+    width: 90%;
+    margin-left: 1vw;
+    font-weight: 500;
+    font-size: large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.allSettledUp {
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+hr {
+    width: 90%;
+    height: 0.1px;
+    background-color: rgb(221, 221, 221);
+    color: white;
+    text-align: center;
+}
+
+.MemberList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    font-size: 16px;
+    padding-left: 1vh;
+    padding-top: 4px;
+    padding-bottom: 1px;
+    background-color: rgba(201, 239, 246, 0.096);
+    border-radius: 10px;
+    box-shadow: -5px 5px 3px 0px rgba(98, 212, 232, 0.401);
 }
