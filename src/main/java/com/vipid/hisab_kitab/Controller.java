@@ -45,7 +45,7 @@ public class Controller {
 
     @PutMapping("/users")
     public Users createUser(@RequestBody Users user) {
-        if (!userRepository.findById(user.getUserId()).isPresent())
+        if (userRepository.findById(user.getUserId()).isEmpty())
             userRepository.save(user);
         return user;
     }
@@ -127,6 +127,20 @@ public class Controller {
             }
         }
         return map;
+    }
+
+    @GetMapping("/events/inviteKey")
+    public String getInviteKey(){
+        Event event = eventRepository.findById(1).orElse(null);
+        if(event==null) return "";
+        return event.getInviteKey();
+    }
+
+    @GetMapping("/events/inviteKey/{inviteKey}")
+    public boolean validateInvite(@PathVariable String inviteKey){
+        Event event = eventRepository.findById(1).orElse(null);
+        if(event==null) return false;
+        return event.getInviteKey().equals(inviteKey);
     }
 
     @Value("${sendgrid.api.key}")
