@@ -15,7 +15,7 @@ const BaseView = (props) => {
   };
 
   useEffect(() => {
-    fetch(`http://localhost:8080/users/${userInfo.sub}/event`)
+    fetch(`http://${process.env.REACT_APP_API_URL}/users/${userInfo.sub}/event`)
       .then((response)=> {
         if(response.ok)
           return response.json();
