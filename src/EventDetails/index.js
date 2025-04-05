@@ -11,16 +11,16 @@ export default function EventDetails({ userId }){
     const [userIdMapping, setUserIdMapping] = useState({});
 
     useEffect(() => {
-        fetch(`/users/${userId}/event`)
+        fetch(`/api/users/${userId}/event`)
           .then((response) => response.json())
           .then((data) => setExpenseList(data.expenses))
           .catch((err) => console.log(err.message));
 
-        fetch('/users/settlement')
+        fetch('/api/users/settlement')
           .then((response) => response.json())
           .then((data) => setSettlementList(data))
           .catch((err) => console.log(err.message));
-        fetch('/events/users')
+        fetch('/api/events/users')
           .then((response)=>response.json())
           .then((data) => setUserIdMapping(data))
           .catch((err) => console.log(err.message));
