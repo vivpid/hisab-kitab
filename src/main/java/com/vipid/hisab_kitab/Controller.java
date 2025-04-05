@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.*;
 
-@RestController("/api")
+@RestController
 public class Controller {
 
     @Autowired
