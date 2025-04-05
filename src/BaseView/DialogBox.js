@@ -44,7 +44,7 @@ function AddMember({currentUserId, setDialogProps}){
   const [userIdMapping, setUserIdMapping] = useState({});
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    fetch('http://localhost:8080/events/users')
+    fetch('/api/events/users')
           .then((response)=>response.json())
           .then((data) => setUserIdMapping(data))
           .catch((err) => console.log(err.message));
@@ -52,7 +52,7 @@ function AddMember({currentUserId, setDialogProps}){
 
   const copyInvite = () => {
     setLoading(true);
-    fetch('http://localhost:8080/events/inviteKey')
+    fetch('/api/events/inviteKey')
       .then((response) => {
         if(response.ok){
           return response.text();
@@ -60,7 +60,7 @@ function AddMember({currentUserId, setDialogProps}){
       })
       .then((data) => {
         setLoading(false);
-        const inviteLink = `http://localhost:3000/inviteKey/${data}`;
+        const inviteLink = window.location.href + '/inviteKey/' + data;
         if(data.length > 0){
           shareOnMobile({
             text: `Hey!, ${userIdMapping[currentUserId].split(" ")[0]} has invited to an Event`,
@@ -72,7 +72,7 @@ function AddMember({currentUserId, setDialogProps}){
   }
 
   const removeMember = (userId) => {
-    fetch(`http://localhost:8080/users/${currentUserId}/delete/${userId}`, {
+    fetch(`/api/users/${currentUserId}/delete/${userId}`, {
       method: 'DELETE'
     })
     .then((response) => response.json())
@@ -130,7 +130,7 @@ function AddEventDialog({ userId, setEventData, setDialogProps }) {
   const [eventName, setEventName] = useState(null);
   const addEvent = () => {
     setLoading(true);
-    fetch("http://localhost:8080/events", {
+    fetch("/api/events", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -203,7 +203,7 @@ function AddExpense({ userId, setDialogProps }) {
   
   useEffect(() => {
     setLoading(true);
-    fetch('http://localhost:8080/events/users')
+    fetch('/api/events/users')
       .then((response)=>response.json())
       .then((data) => {
         setLoading(false);
@@ -231,7 +231,7 @@ function AddExpense({ userId, setDialogProps }) {
         setExpenseAmountError(true);
     }else{
         setLoading(true)
-        fetch(`http://localhost:8080/users/${userId}/expense`, {
+        fetch(`/api/users/${userId}/expense`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -359,11 +359,11 @@ function SettleUp({ userId, setDialogProps }) {
 
   
   useEffect(() => {
-    fetch('http://localhost:8080/events/users')
+    fetch('/api/events/users')
       .then((response)=>response.json())
       .then((data) => setAllUsers(data))
       .catch((err) => console.log(err.message));
-    fetch('http://localhost:8080/users/settlement')
+    fetch('/api/users/settlement')
       .then((response) => response.json())
       .then((data) => {
         setLoading(false);
@@ -383,7 +383,7 @@ function SettleUp({ userId, setDialogProps }) {
         setExpenseAmountError(true);
     }else{
         setLoading(true);
-        fetch(`http://localhost:8080/users/${userId}/expense`, {
+        fetch(`/api/users/${userId}/expense`, {
             method: 'POST',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({

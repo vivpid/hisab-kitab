@@ -10,7 +10,7 @@ function InvitePage() {
   useEffect(() => {
     if (key) {
       console.log("Invite Key:", key);
-      fetch(`http://localhost:8080/events/inviteKey/${key}`)
+      fetch(`/api/events/inviteKey/${key}`)
         .then((response) => response.text())
         .then((data) => {
             if(data === "true"){

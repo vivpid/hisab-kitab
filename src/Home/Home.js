@@ -43,7 +43,7 @@ function Home() {
     const decodedData = jwtDecode(response.credential);
     setuserInfo(decodedData);
     console.log(userInfo);
-    fetch('http://localhost:8080/users', {
+    fetch('/api/users', {
       method: 'PUT',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -53,7 +53,7 @@ function Home() {
       }),
     });
     if(inviteKey){
-      fetch(`http://localhost:8080/events/addUser/${userInfo.sub}`, {
+      fetch(`/api/events/addUser/${userInfo.sub}`, {
         method: 'POST'
       })
       .then(() => setIsAuthenticated(true));
