@@ -130,7 +130,7 @@ function AddEventDialog({ userId, setEventData, setDialogProps }) {
   const [eventName, setEventName] = useState(null);
   const addEvent = () => {
     setLoading(true);
-    fetch("/events", {
+    fetch("/api/events", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
