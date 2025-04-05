@@ -11,7 +11,7 @@
 	<groupId>com.vipid</groupId>
 	<artifactId>hisab-kitab</artifactId>
 	<version>1.0.0</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>hisab-kitab</name>
 	<description>Hisab Kitab Backend</description>
 	<url/>
@@ -63,6 +63,13 @@
 	</dependencies>
 
 	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
 	</build>
+
 
 </project>
