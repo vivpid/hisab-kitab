@@ -11,16 +11,16 @@ export default function EventDetails({ userId }){
     const [userIdMapping, setUserIdMapping] = useState({});
 
     useEffect(() => {
-        fetch(`http://localhost:8080/users/${userId}/event`)
+        fetch(`/users/${userId}/event`)
           .then((response) => response.json())
           .then((data) => setExpenseList(data.expenses))
           .catch((err) => console.log(err.message));
 
-        fetch('http://localhost:8080/users/settlement')
+        fetch('/users/settlement')
           .then((response) => response.json())
           .then((data) => setSettlementList(data))
           .catch((err) => console.log(err.message));
-        fetch('http://localhost:8080/events/users')
+        fetch('/events/users')
           .then((response)=>response.json())
           .then((data) => setUserIdMapping(data))
           .catch((err) => console.log(err.message));
@@ -76,7 +76,7 @@ function roundUpToDecimal(num, decimalPlaces) {
 function ExpenseListView({ currentUserId, expenseList, userIdMapping, setExpenseList }){
   
   const deleteExpense = (expenseId) => {
-    fetch(`http://localhost:8080/expense/${expenseId}`, {
+    fetch(`/expense/${expenseId}`, {
       method: 'DELETE',
     })
     .then((response) => {

@@ -12,7 +12,7 @@ function InviteRedirect() {
     if (pathParts[1] === "inviteKey" && pathParts[2]) {
       const inviteKey = pathParts[2]; // Extract invite key
       console.log("Invite Key:", inviteKey);
-      fetch(`http://localhost:8080/events/inviteKey/${inviteKey}`)
+      fetch(`/events/inviteKey/${inviteKey}`)
         .then((response) => response.text())
         .then((data) => {
             if(data === "true"){
