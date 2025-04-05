@@ -43,7 +43,7 @@ function Home() {
     const decodedData = jwtDecode(response.credential);
     setuserInfo(decodedData);
     console.log(userInfo);
-    fetch('http://${process.env.REACT_APP_API_URL}/users', {
+    fetch('${process.env.REACT_APP_API_URL}/users', {
       method: 'PUT',
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -53,7 +53,7 @@ function Home() {
       }),
     });
     if(inviteKey){
-      fetch(`http://${process.env.REACT_APP_API_URL}/events/addUser/${userInfo.sub}`, {
+      fetch(`${process.env.REACT_APP_API_URL}/events/addUser/${userInfo.sub}`, {
         method: 'POST'
       })
       .then(() => setIsAuthenticated(true));
