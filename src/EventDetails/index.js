@@ -76,7 +76,7 @@ function roundUpToDecimal(num, decimalPlaces) {
 function ExpenseListView({ currentUserId, expenseList, userIdMapping, setExpenseList }){
   
   const deleteExpense = (expenseId) => {
-    fetch(`/expense/${expenseId}`, {
+    fetch(`/api/expense/${expenseId}`, {
       method: 'DELETE',
     })
     .then((response) => {

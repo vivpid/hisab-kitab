@@ -103,7 +103,7 @@ function AddMember({ currentUserId, setDialogProps }) {
             <div> {userIdMapping[key]} </div>
             {currentUserId === "105532310443150760976" ? (
               <IoIosClose
-                style={{ fontSize: "6vw", color: "red" }}
+                style={{ fontSize: "6vw", color: "red", paddingTop: "0.5vw", paddingBottom: "0.5vw" }}
                 onClick={() => removeMember(key)}
               />
             ) : (
@@ -208,7 +208,7 @@ function ViewEventDetails({
         value={eventData.eventName}
         variant="outlined"
         size="small"
-        disabled={
+        readOnly={
           currentUserId !== eventData.initiatorId ||
           currentUserId !== "105532310443150760976"
         }
@@ -227,7 +227,7 @@ function ViewEventDetails({
         value={eventData.eventDate}
         variant="outlined"
         size="small"
-        disabled={true}
+        readOnly={true}
         sx={{
           marginTop: "2vw",
           "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
@@ -242,7 +242,7 @@ function ViewEventDetails({
         value={currentUserId ? initiatorName : initiatorName}
         variant="outlined"
         size="small"
-        disabled={true}
+        readOnly={true}
         sx={{
           marginTop: "2vw",
           "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
@@ -257,7 +257,7 @@ function ViewEventDetails({
         value={eventData.users.length}
         variant="outlined"
         size="small"
-        disabled={true}
+        readOnly={true}
         sx={{
           marginTop: "2vw",
           "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
