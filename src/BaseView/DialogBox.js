@@ -135,7 +135,7 @@ function AddMember({currentUserId, setDialogProps}){
 function ViewEventDetails({ currentUserId, eventData, setEventData, setDialogProps }) {
   const [loading, setLoading] = useState(false);
   const [eventName, setEventName] = useState(null);
-  const [initiatorName, setInitiatorName] = useState(null);
+  const [initiatorName, setInitiatorName] = useState("fetching...");
   useEffect(() => {
     fetch(`/api/users/${eventData.initiatorId}`)
       .then((response) => response.json())
@@ -202,7 +202,7 @@ function ViewEventDetails({ currentUserId, eventData, setEventData, setDialogPro
       />
       <TextField
         id="initiatorId"
-        label="Event Initiator"
+        label="Event Started By"
         value={currentUserId ? initiatorName : initiatorName}
         variant="outlined"
         size="small"
