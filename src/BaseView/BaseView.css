@@ -41,7 +41,7 @@ div {
 
 .editExpense {
     width: 100%;
-    height: 8vh;
+    height: 7vh;
     display: flex;
     flex-direction: row;
 }
