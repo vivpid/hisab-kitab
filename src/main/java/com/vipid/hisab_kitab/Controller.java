@@ -36,10 +36,13 @@ public class Controller {
         event.setEventId(1);
         UUID inviteKey = UUID.randomUUID();
         event.setInviteKey(inviteKey.toString());
-        event = eventRepository.save(event);
         Users initiator = userRepository.findById(event.getInitiatorId()).orElse(null);
-        if (initiator != null)
-            addUserToEvent(initiator.getUserId());
+        if (initiator != null){
+            Set<Users> usersSet = new HashSet<>();
+            usersSet.add(initiator);
+            event.setUsers(usersSet);
+        }
+        event = eventRepository.save(event);
         return event;
     }
 
