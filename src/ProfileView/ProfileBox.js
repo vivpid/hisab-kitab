@@ -11,6 +11,7 @@ export default function ProfileBox({ userInfo, onSignOut, setViewProfile }) {
           onClick={() => setViewProfile(false)}
         />
       </div>
+      <hr />
       <div className="InfoBox">
         <div>{userInfo.name}</div>
       </div>

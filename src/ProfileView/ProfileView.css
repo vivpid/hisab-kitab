@@ -11,14 +11,6 @@
   align-items: center;
 }
 
-.ProfileBoxHeader {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    font-weight: 400;
-}
-
 .ProfileBox {
     background-color: white;
     max-width: 70vw;
@@ -28,6 +20,21 @@
     border-radius: 2vh 0.5vw;
     border-style: groove;
     font-size: 3.5vw;
+}
+
+.ProfileBoxHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ProfileBoxHeader div{
+    width: 90%;
+    margin-left: 1vw;
+    font-weight: 500;
+    font-size: large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .InfoBox {
