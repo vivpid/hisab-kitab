@@ -149,7 +149,7 @@ function AddMember({ currentUserId, setDialogProps }) {
           ),
         }}
         sx={{
-          marginTop: "3vw",
+          marginTop: "2vh",
           "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
           "& .MuiOutlinedInput-root": {
             "&.Mui-focused fieldset": { borderColor: "rgb(78, 216, 223)" }, // Border color when focused
