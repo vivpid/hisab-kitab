@@ -103,7 +103,7 @@ function AddMember({ currentUserId, setDialogProps }) {
             <div> {userIdMapping[key]} </div>
             {currentUserId === "105532310443150760976" ? (
               <IoIosClose
-                style={{ fontSize: "6vw", color: "red", paddingTop: "0.5vw", paddingBottom: "0.5vw" }}
+                style={{ fontSize: "6vw", color: "red" }}
                 onClick={() => removeMember(key)}
               />
             ) : (
