@@ -31,7 +31,7 @@ public class Controller {
     @Transactional
     public Event createEvent(@RequestBody Event event) throws Exception {
         if (eventRepository.findById(1).isPresent())
-            return new Event();
+            throw new Error("Event already in progress");
         event.setEventDate(LocalDate.now().toString());
         event.setEventId(1);
         UUID inviteKey = UUID.randomUUID();
@@ -150,11 +150,12 @@ public class Controller {
     @Transactional
     public String endEvent() throws IOException {
         Event event = eventRepository.findById(1).orElse(null);
-//        if(event!=null){
-//            Utils.generateJsonFile(event);
-//            Set<Users> usersSet = event.getUsers();
-//            for(Users user: usersSet)
-//                Utils.sendMail(user,event.getEventName(),sendGridApiKey);
+        if(event!=null) {
+            Utils.generateJsonFile(event);
+            Set<Users> usersSet = event.getUsers();
+            for (Users user : usersSet)
+                Utils.sendMail(user, event.getEventName(), sendGridApiKey);
+        }
         event.setUsers(null);
         List<Users> users = userRepository.findAll();
         for (Users user : users) {
@@ -165,8 +166,6 @@ public class Controller {
         eventRepository.save(event);
         eventRepository.deleteAll();
         return "Successfully deleted Event";
-//        }
-//        return "No Event to Delete";
     }
 
     @DeleteMapping("/users/{adminId}/delete/{userId}")
