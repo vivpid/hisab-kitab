@@ -10,7 +10,6 @@ import InputAdornment from '@mui/material/InputAdornment';
 import Select from "@mui/material/Select";
 import SettledExpenses from "./SettledExpenses.png";
 import { ClipLoader } from "react-spinners";
-import { shareOnMobile } from "react-mobile-share";
 
 const SETTLEMENT_DESCRIPTION = '__SettlementKey__';
 
@@ -66,13 +65,21 @@ function AddMember({currentUserId, setDialogProps}){
       })
       .then((data) => {
         setLoading(false);
-        const inviteLink = `http://localhost:3000/inviteKey/${data}`;
+        const inviteLink = `http://hisab-kitab.ddns.net/inviteKey/${data}`;
         if(data.length > 0){
-          shareOnMobile({
-            text: `Hey!, ${userIdMapping[currentUserId].split(" ")[0]} has invited to an Event`,
-            url: inviteLink,
-            title: "Hisab-Kitab",
-          });
+          if (navigator.share) {
+            // Use the native share API
+            navigator.share({
+              text: `Hey!, ${userIdMapping[currentUserId].split(" ")[0]} has invited you to an Event`,
+              url: inviteLink,
+              title: "Hisab-Kitab",
+            }).catch((err) => console.log("Error sharing:", err));
+          } else {
+            // Fallback: Copy the link to the clipboard
+            navigator.clipboard.writeText(inviteLink).then(() => {
+              alert("Invite link copied to clipboard!");
+            }).catch((err) => console.log("Error copying to clipboard:", err));
+          }
         }
       });
   }
