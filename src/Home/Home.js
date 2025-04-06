@@ -96,8 +96,11 @@ function Home() {
           </div>
         )}
         {viewProfile ? (
-          <ProfileView userInfo={userInfo} onSignOut={handleLogout}/>
+          <ProfileView userInfo={userInfo} onSignOut={handleLogout} setViewProfile={setViewProfile}/>
         ): <div/>}
+      </div>
+      <div className="BottomView">
+        Support: vivpid@gmail.com
       </div>
     </GoogleOAuthProvider>
   );

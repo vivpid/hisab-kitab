@@ -15,11 +15,26 @@
     background-color: white;
     max-width: 70vw;
     height: auto;
-    border: 1vh;
+    border: 1vw;
     border-color: black;
     border-radius: 2vh 0.5vw;
     border-style: groove;
-    font-size: 3vh;
+    font-size: 3.5vw;
+}
+
+.ProfileBoxHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ProfileBoxHeader div{
+    width: 90%;
+    margin-left: 1vh;
+    font-weight: 500;
+    font-size: large;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .InfoBox {
@@ -36,7 +51,7 @@ button {
     background-color: rgb(78, 216, 223);
     color: rgb(244, 54, 54);
     margin-top: 2vh;
-    font-size: 3vh;
+    font-size: 3vw;
     padding: 1vh 0vw;
     font-family: 'Times New Roman', Times, serif;
     font-weight: bold;

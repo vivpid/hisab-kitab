@@ -1,9 +1,26 @@
 .BaseView {
     width: 100%;
-    height: 90vh;
+    height: 80vh;
     color: rgb(78, 216, 223);
     display: flex;
     flex-direction: column;
+}
+
+div {
+    user-select: none;
+    cursor: default;
+}
+
+.BottomView {
+    width: 100%;
+    background-color: rgb(78, 216, 223);
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-size: large;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-direction: row;
 }
 
 .LoginScreen {
@@ -15,7 +32,7 @@
 
 .eventView {
     width: 100%;
-    height: 80vh;
+    height: 72vh;
 }
 
 .eventView img {
@@ -24,20 +41,15 @@
 
 .editExpense {
     width: 100%;
-    height: 10vh;
+    height: 7vh;
     display: flex;
     flex-direction: row;
-    user-select: none;
-    cursor: default;
-    
 }
 
 .addExpense {
     width: 49.5vw;
     align-content: center;
     text-align: center;
-    font-weight: 200;
-    font-size: large;
 }
 
 .settleUp {
@@ -47,7 +59,7 @@
 }
 
 .addEvent {
-    height: 10vh;
+    height: 8vh;
     text-align: center;
     font-weight: 200;
     font-size: large;
@@ -72,10 +84,13 @@
 }
 
 .dialogBoxView {
-    width: 100%;
-    height: 100%;
-    z-index: 1001;
-    background-color: rgba(0, 0, 0, 0.104);
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
     align-items: center;
     display: flex;
     justify-content: center;
@@ -122,10 +137,9 @@ hr {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     font-size: 16px;
-    padding-left: 1vh;
-    padding-top: 4px;
-    padding-bottom: 1px;
+    padding: 1vh 1vw;
     background-color: rgba(201, 239, 246, 0.096);
     border-radius: 10px;
     box-shadow: -5px 5px 3px 0px rgba(98, 212, 232, 0.401);
