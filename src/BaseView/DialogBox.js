@@ -52,7 +52,7 @@ export default function DialogBox(props) {
 function AddMember({ currentUserId, setDialogProps }) {
   const [userIdMapping, setUserIdMapping] = useState({});
   const [loading, setLoading] = useState(false);
-  const [inviteLink, setInviteLink] = useState(null);
+  const [inviteLink, setInviteLink] = useState("fetching...");
   useEffect(() => {
     fetch("/api/events/users")
       .then((response) => response.json())
@@ -149,7 +149,7 @@ function AddMember({ currentUserId, setDialogProps }) {
           ),
         }}
         sx={{
-          marginTop: "2vw",
+          marginTop: "3vw",
           "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
           "& .MuiOutlinedInput-root": {
             "&.Mui-focused fieldset": { borderColor: "rgb(78, 216, 223)" }, // Border color when focused
