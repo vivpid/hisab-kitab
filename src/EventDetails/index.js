@@ -56,7 +56,7 @@ function SettlementListView({ currentUserId, settlementList, userIdMapping }){
       {Object.keys(settlementList).map((key) => 
           Object.keys(settlementList[key]).map((itemkey) =>
           (
-          <div className="ListItem" key={key+1}>
+          <div className="ListItem" key={key+1} style={{ justifyContent: 'flex-start'}}>
             <div className="userName">{currentUserId===key ? "You" : userIdMapping[key].split(" ")[0]}</div>
             <div className="userDetail" key={itemkey+100}>&nbsp;{currentUserId === key ? "owe" : "owes"} ₹{roundUpToDecimal(settlementList[key][itemkey],2)} to {currentUserId === itemkey ? "You" : userIdMapping[itemkey].split(" ")[0]}</div>
           </div>
