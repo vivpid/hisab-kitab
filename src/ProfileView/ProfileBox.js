@@ -8,7 +8,10 @@ export default function ProfileBox({ userInfo, onSignOut, setViewProfile }) {
         <div>Profile</div>
         <IoIosClose
           style={{ fontSize: "8vw" }}
-          onClick={() => setViewProfile(false)}
+          onClick={() => {
+            alert("close profile box");
+            setViewProfile(false);
+          }}
         />
       </div>
       <div className="InfoBox">
