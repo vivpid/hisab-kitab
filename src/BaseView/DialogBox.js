@@ -15,6 +15,7 @@ import { ClipLoader } from "react-spinners";
 const SETTLEMENT_DESCRIPTION = "__SettlementKey__";
 
 export default function DialogBox(props) {
+  const [showSnackbar, setShowSnackbar] = useState(false);
   const { dialogType, setDialogProps, userId, setEventData, eventData } = props;
   return (
     <div className="dialogBoxView">
@@ -39,16 +40,24 @@ export default function DialogBox(props) {
             currentUserId={userId}
             setDialogProps={setDialogProps}
             eventData={eventData}
+            setShowSnackbar={setShowSnackbar}
           />
         ) : (
           <SettleUp userId={userId} setDialogProps={setDialogProps} />
         )}
       </div>
+        <Snackbar
+          open={showSnackbar}
+          autoHideDuration={5000}
+          onClose={() => setShowSnackbar(false)}
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          message="Copied Invite Link!"
+        />
     </div>
   );
 }
 
-function AddMember({ currentUserId, setDialogProps }) {
+function AddMember({ currentUserId, setDialogProps, setShowSnackbar }) {
   const [userIdMapping, setUserIdMapping] = useState({});
   const [loading, setLoading] = useState(false);
   const [inviteLink, setInviteLink] = useState("fetching...");
@@ -139,6 +148,7 @@ function AddMember({ currentUserId, setDialogProps }) {
                       document.querySelector('#inviteLink').select();
                       document.execCommand('copy');
                     }
+                    setShowSnackbar(true);
                   } else {
                     alert("No invite link to copy!");
                   }
