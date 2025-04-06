@@ -6,6 +6,7 @@
     "@capacitor/share": "^7.0.1",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.0.1",
     "@mui/material": "^7.0.1",
     "@react-oauth/google": "^0.12.1",
     "cra-template": "1.2.0",
