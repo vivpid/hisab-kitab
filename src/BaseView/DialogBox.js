@@ -69,12 +69,7 @@ function AddMember({currentUserId, setDialogProps}){
         const inviteLink = `http://hisab-kitab.ddns.net/inviteKey/${data}`;
         if(data.length > 0){
           try {
-          Share.share({
-            title: 'Share Invite Link',
-            text: `Hey!, ${userIdMapping[currentUserId].split(" ")[0]} has invited to an Event`,
-            url: inviteLink,
-            dialogTitle: 'Share',
-          });
+            navigator.clipboard.writeText(inviteLink).then(() => alert("Invite link copied to clipboard!"));
           } catch (error) {
             console.error('Error sharing:', error);
             alert(error.message);
