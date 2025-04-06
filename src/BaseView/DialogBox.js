@@ -208,11 +208,7 @@ function ViewEventDetails({
         value={eventData.eventName}
         variant="outlined"
         size="small"
-        readOnly={
-          currentUserId !== eventData.initiatorId ||
-          currentUserId !== "105532310443150760976"
-        }
-        onChange={(e) => setEventName(e.target.value)}
+        readOnly={true}
         sx={{
           marginTop: "2vw",
           "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
@@ -239,7 +235,7 @@ function ViewEventDetails({
       <TextField
         id="initiatorId"
         label="Event Started By"
-        value={currentUserId ? initiatorName : initiatorName}
+        value={initiatorName}
         variant="outlined"
         size="small"
         readOnly={true}

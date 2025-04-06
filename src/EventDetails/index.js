@@ -97,7 +97,7 @@ function ExpenseListView({ currentUserId, expenseList, userIdMapping, setExpense
       <div className="ListView">
       {expenseList ? expenseList.sort((a,b) => a.expenseId - b.expenseId).map((item, index) => (item.description === SETTLEMENT_DESCRIPTION) ? 
         (
-          <div className="ListItem settlement" key={index}>
+          <div className="ListItem settlement" key={index} style={{ justifyContent: 'flex-start' }}>
             <div className="userName">{item.userName.split(" ")[0]}</div>
             <div className="userDetail">&nbsp;settled ₹{item.amount/2} with {userIdMapping[item.creditors[0]].split(" ")[0]}</div>
             {
