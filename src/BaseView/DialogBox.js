@@ -66,16 +66,19 @@ function AddMember({currentUserId, setDialogProps}){
       })
       .then((data) => {
         setLoading(false);
-        const inviteLink = `hisab-kitab.ddns.net/inviteKey/${data}`;
-        alert("At 70 "+data);
+        const inviteLink = `http://hisab-kitab.ddns.net/inviteKey/${data}`;
         if(data.length > 0){
-          alert("At 72");
+          try {
           Share.share({
             title: 'Share Invite Link',
             text: `Hey!, ${userIdMapping[currentUserId].split(" ")[0]} has invited to an Event`,
             url: inviteLink,
             dialogTitle: 'Share',
-        });
+          });
+          } catch (error) {
+            console.error('Error sharing:', error);
+            alert(error.message);
+          }
         }
       });
   }
