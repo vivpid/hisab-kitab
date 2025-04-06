@@ -129,7 +129,7 @@ function AddMember({ currentUserId, setDialogProps }) {
                 style={{ cursor: "pointer", color: "rgb(78, 216, 223)" }}
                 onClick={() => {
                   if (inviteLink && inviteLink.startsWith("http")) {
-                    if(navigation.clipboard){
+                    if(navigator.clipboard){
                       navigator.clipboard
                         .writeText(inviteLink)
                         .then(() => alert("Invite link copied to clipboard!"))
