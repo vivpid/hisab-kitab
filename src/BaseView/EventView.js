@@ -23,7 +23,12 @@ export default function EventView({ userId, eventData, setDialogProps}) {
 function EventHeader({userId, eventName, setDialogProps, eventData}){
     return (
         <div className="eventHeader">
-            <div>{eventName}</div>
+            <div onClick={() => setDialogProps({
+                dialogType: 'viewEventDetails',
+                setDialogProps: setDialogProps,
+                eventData: eventData,
+                userId: userId,
+              })}>{eventName}</div>
             <FaPeopleGroup style={{ fontSize: '8vw', marginLeft: '2vw', marginTop: '7px' }} 
               onClick={() => setDialogProps({
                 dialogType: 'AddMember',

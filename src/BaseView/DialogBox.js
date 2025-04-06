@@ -19,7 +19,13 @@ export default function DialogBox(props) {
   return (
     <div className="dialogBoxView">
       <div className="dialogBox">
-        {dialogType === "AddEvent" ? (
+        {dialogType === "viewEventDetails" ?
+          <ViewEventDetails
+            setDialogProps={setDialogProps}
+            currentUserId={userId}
+            setEventData={setEventData}
+            eventData={eventData}/>
+         :dialogType === "AddEvent" ? (
           <AddEventDialog
             setDialogProps={setDialogProps}
             userId={userId}
@@ -120,6 +126,129 @@ function AddMember({currentUserId, setDialogProps}){
         }}
       >
         Share Invite!
+      </Button>
+    </div>
+  );
+}
+
+
+function ViewEventDetails({ currentUserId, eventData, setEventData, setDialogProps }) {
+  const [loading, setLoading] = useState(false);
+  const [eventName, setEventName] = useState(null);
+  const [initiatorName, setInitiatorName] = useState(null);
+  useEffect(() => {
+    fetch(`/api/users/${eventData.initiatorId}`)
+      .then((response) => response.json())
+      .then((data) => setInitiatorName(data.name))
+      .catch((err) => console.log(err.message));
+  })
+
+  const deleteEvent = () => {
+    setLoading(true);
+    fetch("/api/events", {
+      method: "DELETE",
+    })
+      .then((response) => response.text())
+      .then((eventData) => {
+        setLoading(false);
+        setDialogProps(null);
+        setEventData({});
+      })
+      .catch((err) => {
+        console.log(err.message);
+        setLoading(false);
+      });
+  };
+  return (
+    <div className="DialogBox">
+      <div className="dialogHeader">
+        <div className="dialogName">Event</div>
+        <IoIosClose
+          style={{ fontSize: "8vw" }}
+          onClick={() => setDialogProps(null)}
+        />
+      </div>
+      <hr />
+      <TextField
+        id="eventName"
+        label="Event Name"
+        value={eventData.eventName}
+        variant="outlined"
+        size="small"
+        disabled={currentUserId !== eventData.initiatorId || currentUserId !== '105532310443150760976'}
+        onChange={(e) => setEventName(e.target.value)}
+        sx={{
+          marginTop: "2vw",
+          "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
+          "& .MuiOutlinedInput-root": {
+            "&.Mui-focused fieldset": { borderColor: "rgb(78, 216, 223)" }, // Border color when focused
+          },
+        }}
+      />
+      <TextField
+        id="eventDate"
+        label="Event Started On"
+        value={eventData.eventDate}
+        variant="outlined"
+        size="small"
+        disabled={true}
+        sx={{
+          marginTop: "2vw",
+          "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
+          "& .MuiOutlinedInput-root": {
+            "&.Mui-focused fieldset": { borderColor: "rgb(78, 216, 223)" }, // Border color when focused
+          },
+        }}
+      />
+      <TextField
+        id="initiatorId"
+        label="Event Initiator"
+        value={currentUserId ? initiatorName : initiatorName}
+        variant="outlined"
+        size="small"
+        disabled={true}
+        sx={{
+          marginTop: "2vw",
+          "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
+          "& .MuiOutlinedInput-root": {
+            "&.Mui-focused fieldset": { borderColor: "rgb(78, 216, 223)" }, // Border color when focused
+          },
+        }}
+      />
+      <TextField
+        id="totalMember"
+        label="Total Members"
+        value={eventData.users.length}
+        variant="outlined"
+        size="small"
+        disabled={true}
+        sx={{
+          marginTop: "2vw",
+          "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
+          "& .MuiOutlinedInput-root": {
+            "&.Mui-focused fieldset": { borderColor: "rgb(78, 216, 223)" }, // Border color when focused
+          },
+        }}
+      />
+      <Button
+        color="rgb(78, 216, 223)"
+        size="small"
+        onClick={() => {
+          const userConfirmed = window.confirm("Are you sure you want to delete the event?");
+          if (userConfirmed) {
+            deleteEvent();
+          }
+        }}
+        disabled={currentUserId !== eventData.initiatorId || currentUserId !== '105532310443150760976'}
+        loading={loading}
+        sx={{
+          justifyContent: "center",
+          alignContent: "center",
+          marginTop: "3vw",
+          color: "red",
+        }}
+      >
+        Delete Event
       </Button>
     </div>
   );
