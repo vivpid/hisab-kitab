@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import "./BaseView.css";
 import TextField from "@mui/material/TextField";
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { useEffect, useState } from "react";
 import { IoIosClose } from "react-icons/io";
 import InputLabel from "@mui/material/InputLabel";
@@ -11,7 +11,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import Select from "@mui/material/Select";
 import SettledExpenses from "./SettledExpenses.png";
 import { ClipLoader } from "react-spinners";
-import Snackbar from '@mui/material/Snackbar';
+import Snackbar from "@mui/material/Snackbar";
 
 const SETTLEMENT_DESCRIPTION = "__SettlementKey__";
 
@@ -47,21 +47,22 @@ export default function DialogBox(props) {
           <SettleUp userId={userId} setDialogProps={setDialogProps} />
         )}
       </div>
-        <Snackbar
-          open={showSnackbar}
-          autoHideDuration={5000}
-          onClose={() => setShowSnackbar(false)}
-          anchorOrigin={{ vertical: "top", horizontal: "center" }}
-          message="Copied Invite Link!"
-        />
+      <Snackbar
+        open={showSnackbar}
+        autoHideDuration={5000}
+        onClose={() => setShowSnackbar(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+        message="Copied Invite Link!"
+      />
     </div>
   );
 }
 
 function AddMember({ currentUserId, setDialogProps, setShowSnackbar }) {
   const [userIdMapping, setUserIdMapping] = useState({});
-  const [loading, setLoading] = useState(false);
+  const [inviteLinkError, setInviteLinkError] = useState(false);
   const [inviteLink, setInviteLink] = useState("fetching...");
+  const [copyClicked, setCopyClicked] = useState(false);
   useEffect(() => {
     fetch("/api/events/users")
       .then((response) => response.json())
@@ -71,16 +72,18 @@ function AddMember({ currentUserId, setDialogProps, setShowSnackbar }) {
       .then((response) => {
         if (response.ok) {
           return response.text();
+        }else{
+          throw new Error("Failed to fetch invite key");
         }
       })
       .then((data) => {
-        setLoading(false);
-        const inviteLink = window.location.href + '/inviteKey/' + data;
+        setInviteLinkError(false);
+        const inviteLink = window.location.href + 'inviteKey/' + data;
         setInviteLink(inviteLink);
       })
       .catch((err) => {
-        console.log(err.message);
-        setLoading(false);
+        console.log('Invite Link Error: '+err.message);
+        setInviteLinkError(true);
         setInviteLink("Error fetching invite link");
       });
   }, []);
@@ -126,43 +129,55 @@ function AddMember({ currentUserId, setDialogProps, setShowSnackbar }) {
 
       <TextField
         id="inviteLink"
-        label="Invite Link"
+        label={inviteLinkError ? '': 'Invite Link'}
         variant="outlined"
         size="small"
         value={inviteLink}
         readOnly={true}
-        InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <ContentCopyIcon
-                style={{ cursor: "pointer", color: "rgb(78, 216, 223)" }}
-                onClick={() => {
-                  if (inviteLink && inviteLink.startsWith("http")) {
-                    if(navigator.clipboard){
-                      navigator.clipboard
-                        .writeText(inviteLink)
-                        .then(() => alert("Invite link copied to clipboard!"))
-                        .catch((err) =>
-                          console.error("Failed to copy link:", err)
-                        );
-                    }else{
-                      document.querySelector('#inviteLink').select();
-                      document.execCommand('copy');
+        error={inviteLinkError}
+        slotProps={{
+          input: {
+            endAdornment: (
+              <InputAdornment position="end">
+                { inviteLinkError ? (<></>) :
+                <ContentCopyIcon
+                  style={{ cursor: "pointer", color: copyClicked ? "black" : "rgb(78, 216, 223)"}}
+                  onClick={() => {
+                    setCopyClicked(true);
+                    setTimeout(() => {
+                      setCopyClicked(false);
+                    }, 500);
+                    if (inviteLink && inviteLink.startsWith("http")) {
+                      if (navigator.clipboard) {
+                        navigator.clipboard
+                          .writeText(inviteLink)
+                          .catch((err) =>
+                            console.error("Failed to copy link:", err)
+                          );
+                      } else {
+                        document.querySelector("#inviteLink").select();
+                        document.execCommand("copy");
+                      }
+                      setShowSnackbar(true);
+                    } else {
+                      console.log('No invite link to copy!');
                     }
-                    setShowSnackbar(true);
-                  } else {
-                    alert("No invite link to copy!");
-                  }
-                }}
-              />
-            </InputAdornment>
-          ),
+                  }}
+                />
+              }
+              </InputAdornment>
+            ),
+
+          },
         }}
         sx={{
           marginTop: "2vh",
+          "& .MuiInputBase-input": {
+            color: inviteLinkError ? 'red' : 'black',
+          },
           "& label.Mui-focused": { color: "rgb(78, 216, 223)" },
           "& .MuiOutlinedInput-root": {
-            "&.Mui-focused fieldset": { borderColor: "rgb(78, 216, 223)" }, // Border color when focused
+            "&.Mui-focused fieldset": { borderColor: inviteLinkError ? 'red' : 'rgb(78, 216, 223)' }, // Border color when focused
           },
         }}
       />

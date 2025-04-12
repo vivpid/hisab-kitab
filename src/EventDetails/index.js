@@ -47,7 +47,15 @@ export default function EventDetails({ userId }){
 function SettlementListView({ currentUserId, settlementList, userIdMapping }){
 
   if(Object.keys(settlementList).length===0 || Object.keys(userIdMapping).length===0){
-    return (<div>No Settlement Required</div>)
+    return (
+    <div className="settlementView">
+      <div className="ListHeader">Settlement View</div>
+      <div className="ListView">
+        <div className="ListItem" style={{ justifyContent: 'center'}}>
+          <div className="userDetail">No Settlements to be Done!</div>
+        </div>
+      </div>
+      </div>)
   }
   return (
     <div className="settlementView">
@@ -90,6 +98,17 @@ function ExpenseListView({ currentUserId, expenseList, userIdMapping, setExpense
     })
     .catch((err) => console.log(err.message));
   };
+
+  if(expenseList.length === 0){
+      return (<div className="expenseListView">
+        <div className="ListHeader">Expenses List</div>
+        <div className="ListView">
+          <div className="ListItem" style={{ justifyContent: 'center'}}>
+            <div className="userDetail">No Expenses Recorded!</div>
+          </div>
+        </div>
+      </div>)
+  }
 
   return (
     <div className="expenseListView">

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './BaseView.css';
 export default function OptionsBar({ userId, showEventOptions, setDialogProps, setEventData }){
     return (<div>
+      <hr/>
         {showEventOptions ? 
         <EditExpense userId={userId} setDialogProps={setDialogProps}/> : 
         <AddEvent userId={userId} setDialogProps={setDialogProps} setEventData={setEventData}/>}

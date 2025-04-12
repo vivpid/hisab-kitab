@@ -6,7 +6,6 @@ import { jwtDecode } from "jwt-decode";
 import ProfileView from '../ProfileView';
 import '../BaseView/BaseView.css';
 import { useInviteKey } from './InviteKeyProvider';
-import { setIn } from 'immutable';
 
 function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -30,6 +29,15 @@ function Home() {
       const currentTime = Math.floor(Date.now() / 1000);
       if(expirationTime > currentTime){
         setuserInfo(decodedToken);
+        if(inviteKey){
+          fetch(`/api/events/addUser/${decodedToken.sub}`, {
+            method: 'POST'
+          })
+          .then(() => setIsAuthenticated(true));
+          setInviteKey(null);
+        }else{
+          setIsAuthenticated(true);
+        }
         return true;
       }
     } catch (error) {
@@ -42,7 +50,8 @@ function Home() {
     console.log("Login successful:", response);
     const decodedData = jwtDecode(response.credential);
     setuserInfo(decodedData);
-    console.log(userInfo);
+    console.log(decodedData);
+    
     fetch('/api/users', {
       method: 'PUT',
       headers: { "Content-Type": "application/json" },
@@ -53,7 +62,7 @@ function Home() {
       }),
     });
     if(inviteKey){
-      fetch(`/api/events/addUser/${userInfo.sub}`, {
+      fetch(`/api/events/addUser/${decodedData.sub}`, {
         method: 'POST'
       })
       .then(() => setIsAuthenticated(true));
