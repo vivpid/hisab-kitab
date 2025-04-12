@@ -39,6 +39,8 @@ public class Controller {
         Users initiator = userRepository.findById(event.getInitiatorId()).orElse(null);
         if (initiator != null){
             Set<Users> usersSet = new HashSet<>();
+            event = eventRepository.save(event);
+            initiator.setEvent(event);
             usersSet.add(initiator);
             event.setUsers(usersSet);
         }
@@ -60,7 +62,8 @@ public class Controller {
 
     @GetMapping("/users/{userId}/event")
     public Event getEventForUser(@PathVariable String userId) {
-        if (userRepository.findById(userId).isEmpty()) return null;
+        Users user = userRepository.findById(userId).orElse(null);
+        if (user == null || user.getEvent() == null) return null;
         return eventRepository.findById(1).orElse(null);
     }
 
